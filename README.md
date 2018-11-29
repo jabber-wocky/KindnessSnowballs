@@ -19,3 +19,6 @@ npm run build
 ```
 npm run lint
 ```
+
+### logo
+logomakr.com/7W8KIo
