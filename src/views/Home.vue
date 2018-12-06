@@ -90,12 +90,12 @@ export default {
 }
 </script>
 <style scoped>
-.snowball-title {
-  margin-top:20px;
-  margin-bottom:20px;
-}
-.snowball-title h1 {
-  font-family: 'Mountains of Christmas', cursive;
-  font-size:35pt;
-}
+  .snowball-title {
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+  .snowball-title h1 {
+    font-family: 'Mountains of Christmas', cursive;
+    font-size:35pt;
+  }
 </style>
