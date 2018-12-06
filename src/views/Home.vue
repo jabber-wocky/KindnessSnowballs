@@ -1,9 +1,12 @@
 <template>
   <div>
-    <section>
-      <div class="text-xs-center mt-3" >
-        <img src="@/assets/logo.png" alt="Snowballs of kindness logo" />
-      </div>
+    <section class="text-xs-center snowball-title">
+      <simple-svg 
+        :filepath="snowflake"
+        :width="'125px'"
+        fill="#A8A9C5"
+      />
+      <h1 class="accent--text">Snowball of Kindness</h1>
     </section>
 
     <v-footer dark height="auto" class="accent">
@@ -75,3 +78,24 @@
     </v-footer>
   </div>
 </template>
+
+<script>
+import snowflakeSvg from '@/assets/snowflake.svg'
+export default {
+  data() {
+    return {
+      snowflake: snowflakeSvg
+    }
+  }
+}
+</script>
+<style scoped>
+.snowball-title {
+  margin-top:20px;
+  margin-bottom:20px;
+}
+.snowball-title h1 {
+  font-family: 'Mountains of Christmas', cursive;
+  font-size:35pt;
+}
+</style>

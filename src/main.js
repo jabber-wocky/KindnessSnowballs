@@ -1,5 +1,6 @@
 import '@babel/polyfill'
 import Vue from 'vue'
+import './plugins/vue-simple-svg'
 import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
