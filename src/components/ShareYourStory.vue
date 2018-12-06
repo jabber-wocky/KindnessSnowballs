@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="showDialog" width="90%" style="max-width:900px;">
+  <v-dialog v-model="showDialog" max-width="600px">
     <v-snackbar v-model="showSnackbar" bottom :timeout="0" slot="activator">
       Share your snowball of kindness story
       <v-btn color="pink" flat>
