@@ -1,7 +1,7 @@
 <template>
-  <v-dialog v-model="showDialog" max-width="600px">
+  <v-dialog v-model="showDialog" max-width="600px" >
     <v-snackbar v-model="showSnackbar" bottom :timeout="0" slot="activator">
-      Share your snowball of kindness story
+      Were you hit by a snowball of kindness?
       <v-btn color="pink" flat>
         Share
       </v-btn>
@@ -59,8 +59,12 @@
 export default {
   data() {
     return {
-      showSnackbar: true,
       showDialog: false
+    }
+  }, 
+  computed: {
+    showSnackbar() {
+      return !this.showDialog;
     }
   }
 }
