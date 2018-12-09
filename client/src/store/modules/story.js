@@ -7,13 +7,13 @@ export default {
     data: []
   },
   getters: {
-    all (state) {
+    all(state) {
       return state.data
-      .sort((a,b) => {
-        a = new Date(a.posted)
-        b = new Date(b.posted)
-        return a > b ? -1 : a < b ? 1 : 0
-      })
+        .sort((a, b) => {
+          a = new Date(a.posted)
+          b = new Date(b.posted)
+          return a > b ? -1 : a < b ? 1 : 0
+        })
     }
   },
   mutations: {
@@ -25,24 +25,25 @@ export default {
     }
   },
   actions: {
-    async load ({ commit}) {
-      var request = await storyService.getAll();
-      
-      if (request.status === 200) {
+    async load({ commit }) {
+      try {
+        var request = await storyService.getAll();
         commit(types.ADD_RANGE, request.data)
-        return
       }
-      
-      commit(types.ADD_RANGE, [])
+      catch {
+        console.error("Could not load stories.")
+        commit(types.ADD_RANGE, [])
+      }
     },
-    async add ({ commit }, story) {
-      var request = await storyService.add(story);
-      
-      if (request.status === 200) {
+    async add({ commit }, story) {
+      try {
+        var request = await storyService.add(story);
         commit(types.ADD, request.data)
-        return;
       }
-      alert("problems saving story");
+      catch {
+        console.error("could not save story", story)
+        alert("Error: could not save story");
+      }
     },
 
   }

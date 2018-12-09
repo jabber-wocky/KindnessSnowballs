@@ -55,17 +55,24 @@ const http = axios.create({
 
 var validateAddStory = async (req) => {
 
-  var recaptcha = await http.request('https://www.google.com/recaptcha/api/siteverify',
-    {
-      method:'post',
-      params: {
-        'secret': appsettings.recaptchaKey,
-        'response': req.body.token
+  try {
+    var recaptcha = await http.request('https://www.google.com/recaptcha/api/siteverify',
+      {
+        method:'post',
+        params: {
+          'secret': appsettings.recaptchaKey,
+          'response': req.body.token
+        }
       }
-    }
-  )
-  var hasStory = (req.body.story !== null && req.body.story.length > 0)
-  return hasStory && recaptcha.data.success
+    )
+  }
+  catch {
+    return { isValid: false, errorMessage: 'failed recaptcha check' }
+  }
+  if (req.body.story === null || req.body.story.length <= 0)
+    return { isValid: false, errorMessage: 'story is required.'}
+
+  return { isValid: true }
 }
 
 app.get('/api/stories', (req, res) => {
@@ -75,8 +82,8 @@ app.get('/api/stories', (req, res) => {
 })
 
 app.post(`/api/stories`, async (req, res) => {
-  var isValid = await validateAddStory(req)
-  if (isValid) {
+  var result = await validateAddStory(req)
+  if (result.isValid) {
     console.log("valid")
     var story = {
       name: req.body.name,
@@ -90,7 +97,7 @@ app.post(`/api/stories`, async (req, res) => {
   }
   else {
     res.status(400)
-    res.send("Invalid request")
+    res.send(result.message)
   }
 })
 

@@ -1,7 +1,7 @@
 <template>
 <section>
   <h2 class="headline mt-3 text-xs-center">Stories</h2>
-   <v-timeline>
+   <v-timeline class="mx-5">
     <v-timeline-item
       v-for="n in stories"
       :key="n.id"
@@ -13,7 +13,7 @@
         {{ fromNow(n.posted) }}
       </span>
       <v-card class="elevation-2">
-        <v-card-title class="headline">{{n.name}}</v-card-title>
+        <v-card-title v-if="n.name !== null && n.name.length > 0" class="headline" >{{n.name}}</v-card-title>
         <v-card-text>
           {{n.story}}
         </v-card-text>

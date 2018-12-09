@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    siteKey: '6Lf9oH8UAAAAAORH4YyRFnRfWY7QJNLdeEwrm5jf'
+    siteKey: '6LeXon8UAAAAAF22Z8YBKuUdMlO-0V7oRmOq_ooR'
   },
   getters: {
   },
