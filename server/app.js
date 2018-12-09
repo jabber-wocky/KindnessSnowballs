@@ -4,7 +4,7 @@ const cors = require('cors')
 const appsettings = require('./appsettings.json')
 
 const app = express()
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 8080)
 app.use(express.static('dist'))
 app.use(bodyParser.json())
 app.use(cors())
@@ -65,7 +65,7 @@ var validateAddStory = async (req) => {
       }
     )
   }
-  catch {
+  catch(error) {
     return { isValid: false, errorMessage: 'failed recaptcha check' }
   }
   if (req.body.story === null || req.body.story.length <= 0)
