@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const appsettings = require('./appsettings.secret.json')
+const appsettings = require('./appsettings.json')
 const stories = require('./models/stories')(appsettings)
 
 const app = express()
