@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const appsettings = require('./appsettings.json')
 
 const app = express()
 app.use(express.static('dist'))
@@ -58,7 +59,7 @@ var validateAddStory = async (req) => {
     {
       method:'post',
       params: {
-        'secret': '',
+        'secret': appsettings.recaptchaKey,
         'response': req.body.token
       }
     }
