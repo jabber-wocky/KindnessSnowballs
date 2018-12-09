@@ -2,16 +2,16 @@
   <div>
     <infoPanel />
 
-    <testimonials />
+    <stories />
 
   </div>
 </template>
 
 <script>
 import infoPanel from './_infoPanel'
-import testimonials from './_testimonials'
+import stories from './_stories'
 
 export default {
-  components: { infoPanel, testimonials },
+  components: { infoPanel, stories },
 }
 </script>

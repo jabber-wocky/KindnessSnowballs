@@ -13,7 +13,12 @@
 
       <share-your-story />
 
+
     </v-content>
+    <v-footer class="pa-4">
+      <v-spacer />
+      <div>&copy; 2018</div>
+    </v-footer>
 </v-app>
 </template>
 
