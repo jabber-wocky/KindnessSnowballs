@@ -108,7 +108,6 @@ export default {
 
     },
     onVerify(token) {
-      console.log("got token", token);
       this.token = token
     },
     onExpired() {

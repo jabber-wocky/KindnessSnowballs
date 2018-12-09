@@ -17,9 +17,6 @@ export default {
     }
   },
   mutations: {
-    [types.ADD](state, story) {
-      state.data.push(story)
-    },
     [types.ADD_RANGE](state, stories) {
       state.data.push(...stories)
     }
@@ -38,7 +35,7 @@ export default {
     async add({ commit }, story) {
       try {
         var request = await storyService.add(story);
-        commit(types.ADD, request.data)
+        commit(types.ADD_RANGE, request.data)
       }
       catch {
         console.error("could not save story", story)

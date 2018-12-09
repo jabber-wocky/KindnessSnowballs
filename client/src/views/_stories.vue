@@ -13,7 +13,7 @@
         {{ fromNow(n.posted) }}
       </span>
       <v-card class="elevation-2">
-        <v-card-title v-if="n.name !== null && n.name.length > 0" class="headline" >{{n.name}}</v-card-title>
+        <v-card-title v-if="hasName(n.name)" class="headline" >{{n.name}}</v-card-title>
         <v-card-text>
           {{n.story}}
         </v-card-text>
@@ -42,6 +42,9 @@ export default {
     },
     fromNow(postedDate) {
       return this.moment.tz(postedDate, this.tz).fromNow();
+    },
+    hasName(name) {
+      return typeof(name) !== "undefined" && name !== null && name.length > 0
     }
 
 
