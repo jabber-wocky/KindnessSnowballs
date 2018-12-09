@@ -44,7 +44,7 @@
         Cancel
       </v-btn>
       
-      <v-btn color="primary" flat @click="submit" :disabled="token === null">
+      <v-btn color="primary" flat @click="submit" :disabled="token === null"  :loading="loading">
           Share
         </v-btn>
     </v-card-actions>
@@ -66,7 +66,8 @@ export default {
       storyRules: [
         v => !!v || 'Required'
       ],
-      token: null
+      token: null,
+      loading: false
     }
   }, 
   computed: {
@@ -93,15 +94,22 @@ export default {
       this.clear()
       this.showDialog = false
     },
-    submit() {
+    submit: async function() {
       if (this.$refs.form.validate()) {
-
-        this.add({
-          name: this.name,
-          story: this.story,
-          token: this.token
-        })
-
+        this.loading = true
+        try {
+          await this.add({
+            name: this.name,
+            story: this.story,
+            token: this.token
+          })
+        }
+        catch(error) {
+          console.error("error saving story", error)
+        }
+        finally {
+          this.loading = false
+        }
         this.clear()
         this.showDialog = false
       }

@@ -3,16 +3,13 @@
     <v-content>
       <section :class="'snowball-title text-xs-center snowball-title-' + $vuetify.breakpoint.name">
         <v-layout align-center justify-center>
-          <v-flex class="text-xs-right"><simple-svg :filepath="snowflake" :width="snowflakeSize" fill="#A8A9C5" class="snowball-icon" /></v-flex>
-          <v-flex xs5 class="mx-2"><h1 class="accent--text">Snowball of Kindness</h1></v-flex>
-          <v-flex class="text-xs-left"><simple-svg :filepath="snowflake" :width="snowflakeSize" fill="#A8A9C5" class="snowball-icon" /></v-flex>
+            <v-flex class="text-xs-right"><simple-svg :filepath="snowflake" :width="snowflakeSize" fill="#A8A9C5" class="snowball-icon" /></v-flex>
+            <v-flex xs5 class="mx-2"><h1 class="accent--text">Snowball of Kindness</h1></v-flex>
+            <v-flex class="text-xs-left"><simple-svg :filepath="snowflake" :width="snowflakeSize" fill="#A8A9C5" class="snowball-icon" /></v-flex>
         </v-layout>
       </section>
 
       <router-view />
-
-      <share-your-story />
-
 
     </v-content>
     <v-footer class="pa-4">
@@ -24,11 +21,9 @@
 
 <script>
 import snowflakeSvg from '@/assets/snowflake.svg'
-import shareYourStory from '@/components/ShareYourStory'
 
 export default {
   name: 'App',
-  components: { shareYourStory },
   data () {
     return {
       snowflake: snowflakeSvg,

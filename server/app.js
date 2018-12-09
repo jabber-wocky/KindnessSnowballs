@@ -1,8 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const appsettings = require('./appsettings.json')
-const stories = require('./models/stories')(appsettings)
+
 
 const app = express()
 app.set('port', process.env.PORT || 8080)
@@ -10,59 +9,57 @@ app.use(express.static('dist'))
 app.use(bodyParser.json())
 app.use(cors())
 
-const axios = require("axios")
-const http = axios.create({
-  withCredentials: false,
-  headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-  }
-})
-
-var validateAddStory = async (req) => {
-
-  try {
-    var recaptcha = await http.request('https://www.google.com/recaptcha/api/siteverify',
-      {
-        method:'post',
-        params: {
-          'secret': appsettings.recaptchaKey,
-          'response': req.body.token
-        }
-      }
-    )
-  }
-  catch(error) {
-    return { isValid: false, errorMessage: 'failed recaptcha check' }
-  }
-  if (req.body.story === null || req.body.story.length <= 0)
-    return { isValid: false, errorMessage: 'story is required.'}
-
-  return { isValid: true }
-}
+const storyService = require('./services/story')
+const authService = require('./services/auth')
 
 app.get('/api/stories', async (req, res) => {
   res.send(
-    await stories.all()
+    await storyService.all()
   )
 })
 
 app.post(`/api/stories`, async (req, res) => {
-  var result = await validateAddStory(req)
+  var result = await storyService.validate(req.body)
   if (result.isValid) {
-    console.log("valid")
-    var story = {
-      name: req.body.name,
-      story: req.body.story,
-    }
-    var result = await stories.add(story)
+    var result = await storyService.add(req.body)
     res.send(result)
-
   }
   else {
     res.status(400)
     res.send(result.message)
   }
 })
+
+app.delete('/api/stories', async (req, res) => {
+  var result = await authService.validate(req)
+  if (result.isValid) {
+    try {
+      var result = await storyService.remove(req.query)
+      console.log("result", result)
+      res.send(result)
+    }
+    catch(error) {
+      res.status(400)
+      res.send(error)  
+    }
+  }
+  else {
+    res.status(400)
+    res.send(result.message)
+  }
+})
+
+app.post('/api/auth', async (req, res) => {
+  var result = await authService.login(req.body)
+  
+  if (result.isValid) {
+    res.send("valid")
+  }
+  else {
+    res.status(400)
+    res.send(result.errorMessage)
+  }
+})
+
 
 app.listen(app.get('port'))

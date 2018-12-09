@@ -6,5 +6,9 @@ export default {
   },
   async add(story) {
     return Api().post("stories", story)
+  },
+  async remove(id) {
+    console.log("service", id)
+    return Api().delete("stories", { params: { id: id }} )
   }
 }

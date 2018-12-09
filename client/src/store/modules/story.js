@@ -19,10 +19,20 @@ export default {
   mutations: {
     [types.ADD_RANGE](state, stories) {
       state.data.push(...stories)
+    },
+    [types.REMOVE](state, id) {
+      var index = state.data.map(x => x.Id).indexOf(id)
+      state.data.splice(index, 1)
+    },
+    [types.REMOVE_ALL](state) {
+      state.data = []
     }
   },
   actions: {
     async load({ commit }) {
+      
+      commit(types.REMOVE_ALL)
+
       try {
         var request = await storyService.getAll();
         commit(types.ADD_RANGE, request.data)
@@ -34,7 +44,7 @@ export default {
     },
     async add({ commit }, story) {
       try {
-        var request = await storyService.add(story);
+        var request = await storyService.add(story)
         commit(types.ADD_RANGE, request.data)
       }
       catch {
@@ -42,6 +52,10 @@ export default {
         alert("Error: could not save story");
       }
     },
+    async remove({ dispatch  }, id) {
+      await storyService.remove(id)
+      dispatch('load')
+    }
 
   }
 }
