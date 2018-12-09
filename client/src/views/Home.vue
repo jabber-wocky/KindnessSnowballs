@@ -13,5 +13,8 @@ import stories from './_stories'
 
 export default {
   components: { infoPanel, stories },
+  mounted() {
+    this.$ga.page('/')
+  }
 }
 </script>

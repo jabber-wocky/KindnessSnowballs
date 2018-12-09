@@ -114,7 +114,10 @@ export default {
     onExpired() {
       this.token = null
       this.$refs.recaptcha.reset()
-    }
+    },
+  },
+  mounted() {
+    this.$ga.page('/share')
   }
 }
 </script>
