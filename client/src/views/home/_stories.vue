@@ -13,9 +13,10 @@
         {{ fromNow(n.posted) }}
       </span>
       <v-card class="elevation-2">
-        <v-card-title v-if="hasName(n.name)" class="headline" >{{n.name}}</v-card-title>
+        <!-- <v-card-title v-if="hasName(n.name)" class="headline" >{{n.name}}</v-card-title> -->
         <v-card-text>
           {{n.story}}
+          <div v-if="hasName(n.name)" class="mt-2 body-2 text-xs-right">{{n.name}}</div>
         </v-card-text>
       </v-card>
     </v-timeline-item>

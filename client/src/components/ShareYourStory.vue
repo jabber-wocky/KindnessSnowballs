@@ -16,7 +16,7 @@
       <v-form v-model="valid" ref="form" lazy-validation>
         <v-text-field
           v-model="name"
-          label="Name (Optional)"
+          label="Display Name (Optional)"
           
         ></v-text-field>
         <v-textarea
