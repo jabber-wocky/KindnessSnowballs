@@ -10,7 +10,10 @@ export default () => {
       'Content-Type': 'application/json'
     }
   }
-  if (store.getters.hasAuth)
-    options.auth = store.state.auth
+
+  if (store.getters.hasAuth) {
+    options.auth = store.getters.auth
+  }
+
   return axios.create(options)
 }

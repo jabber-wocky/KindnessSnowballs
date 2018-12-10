@@ -92,7 +92,6 @@ export default {
         }
         try {
           await this.login(data)
-          console.log("successfully logged in:", this.getReturnTo())
           this.$router.push({ path: this.getReturnTo() })
         }
         catch (error) {

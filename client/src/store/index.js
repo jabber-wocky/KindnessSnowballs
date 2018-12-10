@@ -14,11 +14,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    siteKey: '6LeXon8UAAAAAF22Z8YBKuUdMlO-0V7oRmOq_ooR'
+    siteKey: '6LeXon8UAAAAAF22Z8YBKuUdMlO-0V7oRmOq_ooR',
+    auth: null
   },
   getters: {
     hasAuth(state) {
-      return state.hasOwnProperty("auth")
+      return state.hasOwnProperty("auth") && state.auth !== null
+    },
+    auth(state) {
+      if (state.hasOwnProperty("auth") && state.auth !== null)
+        return {
+          username: state.auth.username,
+          password: state.auth.password
+        }
+      return null
     }
   },
   mutations: {
@@ -35,7 +44,7 @@ export default new Vuex.Store({
           password: data.password
         })
       }
-      catch(error) {
+      catch (error) {
         throw error
       }
     }

@@ -52,7 +52,7 @@ export default {
         alert("Error: could not save story");
       }
     },
-    async remove({ dispatch  }, id) {
+    async remove({ dispatch }, id) {
       await storyService.remove(id)
       dispatch('load')
     }

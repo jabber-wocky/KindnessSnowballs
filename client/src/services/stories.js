@@ -1,6 +1,6 @@
 import Api from '@/api'
 
-export default { 
+export default {
   async getAll() {
     return Api().get("stories")
   },
@@ -8,7 +8,6 @@ export default {
     return Api().post("stories", story)
   },
   async remove(id) {
-    console.log("service", id)
-    return Api().delete("stories", { params: { id: id }} )
+    return Api().delete("stories", { params: { id: id } })
   }
 }
