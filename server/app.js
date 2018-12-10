@@ -62,9 +62,8 @@ app.post('/api/auth', async (req, res) => {
   }
 })
 
-app.use(history({
-  verbose: true
-}))
+app.use(history())
+
 app.use('/', express.static(path.join(__dirname, "dist")))
 
 app.listen(app.get('port'))
