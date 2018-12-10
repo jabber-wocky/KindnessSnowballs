@@ -1,13 +1,14 @@
 const express = require('express')
+const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-
+const history = require('connect-history-api-fallback');
 
 const app = express()
 app.set('port', process.env.PORT || 8080)
-app.use(express.static('dist'))
 app.use(bodyParser.json())
 app.use(cors())
+
 
 const storyService = require('./services/story')
 const authService = require('./services/auth')
@@ -61,5 +62,9 @@ app.post('/api/auth', async (req, res) => {
   }
 })
 
+app.use(history({
+  verbose: true
+}))
+app.use('/', express.static(path.join(__dirname, "dist")))
 
 app.listen(app.get('port'))
