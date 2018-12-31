@@ -1,4 +1,4 @@
-const appsettings = require(process.env.NODE_ENV === 'production' ? './appsettings.json' : './appsettings.secret.json')
+const appsettings = process.env.NODE_ENV === 'production' ? process.env : require('./appsettings.secret.json')
 const axios = require("axios")
 const http = axios.create({
   withCredentials: false,
@@ -26,13 +26,10 @@ module.exports = (() => {
     },
     getDbClient : () => {
       var mongoClient = require("mongodb").MongoClient
-      
-      var connectionString = process.env.MONGODB_URI !== "" ? process.env.MONGODB_URI : appsettings.connectionString
-      console.log("using connection string", connectionString)
-      return mongoClient.connect(connectionString, { useNewUrlParser: true })
+      return mongoClient.connect(appsettings.MONGODB_URI, { useNewUrlParser: true })
     },
     getDbName : () => {
-      return appsettings.database
+      return appsettings.MONGODB_DATABASE
     }
   }
 })();
