@@ -7,7 +7,7 @@ module.exports = (() => {
     
       let client = await functions.getDbClient()
       try {
-        var db = client.db('snowball')
+        var db = client.db(functions.getDbName())
         return await db.collection('stories').find({ active : { $ne: false }}).toArray()
       }  
       finally {
@@ -17,7 +17,7 @@ module.exports = (() => {
     add : async (story) => {
       let client = await functions.getDbClient()
       try {
-        var db = client.db('snowball')
+        var db = client.db(functions.getDbName())
         story.posted = new Date();
         var insert_result = await db.collection('stories').insertOne(story)
         return insert_result.ops;
@@ -30,7 +30,7 @@ module.exports = (() => {
       console.log("data", data)
       let client = await functions.getDbClient()
       try {
-        var db = client.db('snowball')
+        var db = client.db(functions.getDbName())
         return await db.collection('stories').updateOne( { _id : ObjectId(data.id)}, { '$set' : { active: false}})
       }
       finally { 

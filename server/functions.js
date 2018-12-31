@@ -30,6 +30,9 @@ module.exports = (() => {
       var connectionString = process.env.MONGODB_URI !== "" ? process.env.MONGODB_URI : appsettings.connectionString
       console.log("using connection string", connectionString)
       return mongoClient.connect(connectionString, { useNewUrlParser: true })
+    },
+    getDbName : () => {
+      return appsettings.database
     }
   }
 })();
