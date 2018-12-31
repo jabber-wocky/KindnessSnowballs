@@ -26,6 +26,9 @@ module.exports = (() => {
     },
     getDbClient : () => {
       var mongoClient = require("mongodb").MongoClient
+      
+      var connectionString = process.env.MONGODB_URI !== "" ? process.env.MONGODB_URI : appsettings.connectionString
+      
       return mongoClient.connect(appsettings.connectionString, { useNewUrlParser: true })
     }
   }
